@@ -51,11 +51,31 @@ const navItems = document.querySelectorAll('.menuItens li');
       });
     }
 
+    // Book page transition
+    document.querySelectorAll('a[href="o-encontro.html"]').forEach(link => {
+      link.addEventListener('click', event => {
+        const shouldSkipTransition = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (shouldSkipTransition) return;
+
+        event.preventDefault();
+        document.body.classList.add('book-page-leaving');
+        window.setTimeout(() => {
+          window.location.href = link.href;
+        }, 520);
+      });
+    });
+
     // --- Dynamic Mobile Sticky Stacking Logic ---
     // This script calculates the exact top offset required to allow tall mobile sections
     // to scroll completely natively to their end before the sticky stacking animation triggers.
+    let mobileStickyStackingInitialized = false;
+
     function initMobileStickyStacking() {
-      const stickySections = document.querySelectorAll('.valueItem, .diferencial-section, .biblioteca-section, .autor-section');
+      if (mobileStickyStackingInitialized) return;
+      mobileStickyStackingInitialized = true;
+
+      const stickySections = document.querySelectorAll('.valueItem, .diferencial-section, .biblioteca-section');
       
       function updateStickyTops() {
         const isMobile = window.innerWidth <= 768;
@@ -64,13 +84,9 @@ const navItems = document.querySelectorAll('.menuItens li');
         stickySections.forEach(section => {
           if (isMobile) {
             const height = section.offsetHeight;
-            // Se o conteúdo for maior que a tela, ele só "gruda" quando o final do conteúdo 
-            // atinge o final da tela. Se for menor, gruda no topo normalmente.
-            if (height > windowHeight) {
-              section.style.top = `${windowHeight - height}px`;
-            } else {
-              section.style.top = '0px';
-            }
+            // No mobile, as seções têm um respiro extra de altura no CSS. O top negativo
+            // faz esse trecho virar uma zona de tolerância antes da próxima seção cobrir a atual.
+            section.style.top = height > windowHeight ? `${windowHeight - height}px` : '0px';
           } else {
             // No desktop o comportamento é sempre grudar no topo
             section.style.top = '0px';
