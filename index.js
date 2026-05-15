@@ -1,110 +1,130 @@
-const navItems = document.querySelectorAll('.menuItens li');
-    const sections = document.querySelectorAll('section');
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '-50% 0px -50% 0px',
-      threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navItems.forEach(item => {
-            const link = item.querySelector('a');
-            const href = link.getAttribute('href');
-            
-            // Se estivermos na home ou o link for vazio, removemos o active
-            if (entry.target.id === 'home' || !href || href === '#') {
-              item.classList.remove('active');
-            } else if (href.substring(1) === entry.target.id) {
-              item.classList.add('active');
-            } else {
-              item.classList.remove('active');
-            }
-          });
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach(section => {
-      if (section.id) observer.observe(section);
-    });
-
-    // Hamburger Menu Logic
+document.addEventListener('DOMContentLoaded', () => {
+    // UI Elements
+    const navItems = document.querySelectorAll('.menuItens li');
+    const sections = document.querySelectorAll('section[id]');
     const hamburger = document.querySelector('.hamburger');
     const menuItens = document.querySelector('.menuItens');
     const menuLinks = document.querySelectorAll('.menuItens a');
 
-    if (hamburger) {
-      hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        menuItens.classList.toggle('active');
-      });
-
-      // Close the menu when a link is clicked
-      menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          hamburger.classList.remove('active');
-          menuItens.classList.remove('active');
+    // 1. Intersection Observer for active menu state
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navItems.forEach(item => {
+                    const link = item.querySelector('a');
+                    if (link) {
+                        const href = link.getAttribute('href');
+                        if (href === `#${id}` || href.endsWith(`#${id}`)) {
+                            navItems.forEach(i => i.classList.remove('active'));
+                            item.classList.add('active');
+                        }
+                    }
+                });
+            }
         });
-      });
-    }
-
-    // Book page transition
-    document.querySelectorAll('a[href="o-encontro.html"]').forEach(link => {
-      link.addEventListener('click', event => {
-        const shouldSkipTransition = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        if (shouldSkipTransition) return;
-
-        event.preventDefault();
-        document.body.classList.add('book-page-leaving');
-        window.setTimeout(() => {
-          window.location.href = link.href;
-        }, 520);
-      });
+    }, {
+        root: null,
+        rootMargin: '-40% 0px -60% 0px',
+        threshold: 0
     });
 
-    // --- Dynamic Mobile Sticky Stacking Logic ---
-    // This script calculates the exact top offset required to allow tall mobile sections
-    // to scroll completely natively to their end before the sticky stacking animation triggers.
-    let mobileStickyStackingInitialized = false;
+    sections.forEach(section => observer.observe(section));
 
-    function initMobileStickyStacking() {
-      if (mobileStickyStackingInitialized) return;
-      mobileStickyStackingInitialized = true;
-
-      const stickySections = document.querySelectorAll('.valueItem, .diferencial-section, .biblioteca-section');
-      
-      function updateStickyTops() {
-        const isMobile = window.innerWidth <= 768;
-        const windowHeight = window.innerHeight;
-        
-        stickySections.forEach(section => {
-          if (isMobile) {
-            const height = section.offsetHeight;
-            // No mobile, as seções têm um respiro extra de altura no CSS. O top negativo
-            // faz esse trecho virar uma zona de tolerância antes da próxima seção cobrir a atual.
-            section.style.top = height > windowHeight ? `${windowHeight - height}px` : '0px';
-          } else {
-            // No desktop o comportamento é sempre grudar no topo
-            section.style.top = '0px';
-          }
+    // 2. Mobile Hamburger Menu Toggle
+    if (hamburger && menuItens) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            menuItens.classList.toggle('active');
         });
-      }
 
-      window.addEventListener('resize', updateStickyTops);
-      
-      // We use ResizeObserver to update positions if images load or text wraps, altering height
-      if (window.ResizeObserver) {
-        const resizeObserver = new ResizeObserver(updateStickyTops);
-        stickySections.forEach(s => resizeObserver.observe(s));
-      }
-      
-      updateStickyTops();
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                menuItens.classList.remove('active');
+            });
+        });
     }
 
-    // Initialize when DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', initMobileStickyStacking);
-    initMobileStickyStacking(); // Also call immediately in case DOM is already loaded
+    // 3. Smooth scroll for internal links
+    document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            const [path, hash] = href.split('#');
+            
+            if (!path || path === window.location.pathname.split('/').pop() || path === 'index.html') {
+                const targetElement = document.getElementById(hash);
+
+                if (targetElement) {
+                    e.preventDefault();
+                    
+                    if (hamburger) {
+                        hamburger.classList.remove('active');
+                        menuItens.classList.remove('active');
+                    }
+
+                    // Using offsetTop for absolute position relative to body
+                    const targetPosition = targetElement.offsetTop - 100;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    history.pushState(null, null, `#${hash}`);
+                }
+            }
+        });
+    });
+
+    // 4. Book page transition
+    document.querySelectorAll('.editorial-link, .book-primary-link, a[href="o-encontro.html"]').forEach(link => {
+        if (link.getAttribute('href') === 'o-encontro.html') {
+            link.addEventListener('click', (e) => {
+                const shouldSkipTransition = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
+                if (shouldSkipTransition) return;
+
+                e.preventDefault();
+                document.body.classList.add('book-page-leaving');
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, 500);
+            });
+        }
+    });
+
+    // 5. Sticky Sections Logic (Fix for tall sections)
+    const stickySections = document.querySelectorAll('.valueItem, .diferencial-section');
+    function updateStickyTops() {
+        const windowHeight = window.innerHeight;
+        stickySections.forEach(section => {
+            const height = section.offsetHeight;
+            if (height > windowHeight - 80) {
+                section.style.top = `${windowHeight - height}px`;
+            } else {
+                section.style.top = '80px';
+            }
+        });
+    }
+
+    window.addEventListener('resize', updateStickyTops);
+    if (window.ResizeObserver) {
+        const resizeObserver = new ResizeObserver(() => updateStickyTops());
+        stickySections.forEach(s => resizeObserver.observe(s));
+    }
+    updateStickyTops();
+
+    // 6. Handle hash on initial load
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+});
