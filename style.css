@@ -1131,6 +1131,42 @@ body.book-page-leaving::before {
   opacity: 0.9;
 }
 
+/* Book Price Tag styles */
+.book-price-tag-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+}
+
+.book-price-tag-container.center {
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.book-price-main {
+  font-family: Fraunces, serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--book-light);
+  line-height: 1;
+}
+
+.book-price-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--book-amber);
+  background: rgba(243, 189, 90, 0.08);
+  border: 1px dashed rgba(243, 189, 90, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+}
+
 .book-story-section {
   display: grid;
   grid-template-columns: 0.9fr 1fr;
