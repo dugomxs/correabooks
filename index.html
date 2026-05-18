@@ -7,13 +7,12 @@
   <link rel="stylesheet" href="style.css">
   <title>Corrêa Books</title>
 </head>
-<body>
+<body class="home-page">
   <nav class="menu">
     <a href="#home" class="logo-link">
       <img src="assets/img/logo_verde (Traced).svg" alt="Corrêa Books">
     </a>
-    
-    <!-- Hamburger Button -->
+
     <button class="hamburger" aria-label="Toggle menu">
       <span class="bar"></span>
       <span class="bar"></span>
@@ -22,98 +21,118 @@
 
     <ul class="menuItens">
       <li><a href="#valores">Valores</a></li>
-      <li><a href="#diferencial">Diferencial</a></li>
+      <li><a href="#manifesto">Manifesto</a></li>
       <li><a href="#biblioteca">Biblioteca</a></li>
       <li><a href="#autores">Autores</a></li>
     </ul>
   </nav>
-  <section id="home" class="hero">
-  </section>
-  <section id="valores">
-    <div class="valueItem">
-      <div class="value-number-side">
-        <span class="editorial-number">01</span>
-      </div>
-      <div class="valueContent">
-        <span class="editorial-label">O Fundamento</span>
-        <h2>Educar</h2>
-        <p>A educação cristã não se limita ao acúmulo de informações, mas à busca pela Sabedoria que vem do Alto. Educamos para que o entendimento seja renovado, oferecendo conteúdos que instruem a mente e fundamentam a fé na Verdade que liberta.</p>
-      </div>
-    </div>
-    
-    <div class="valueItem alt">
-      <div class="valueContent">
-        <span class="editorial-label">O Reflexo</span>
-        <h2>Influenciar</h2>
-        <p>O que lemos transborda em quem somos e no mundo ao nosso redor. Nosso compromisso é publicar mensagens que não fiquem restritas ao papel, mas que moldem caráter, inspirem virtudes e influenciem a cultura com os valores do Reino.</p>
-      </div>
-      <div class="value-number-side">
-        <span class="editorial-number">02</span>
+  <section id="home" class="hero home-hero">
+    <div class="hero-copy">
+      <span class="section-kicker">Corrêa Books</span>
+      <h1>Livros para quem não quer viver no automático.</h1>
+      <p>Um selo editorial cristão, jovem e direto ao ponto: ideias com profundidade, narrativa com alma e páginas que cutucam a vida real.</p>
+      <div class="hero-actions">
+        <a href="#biblioteca" class="primary-button">Conhecer o lançamento</a>
+        <a href="#manifesto" class="ghost-button">Ver manifesto</a>
       </div>
     </div>
 
-    <div class="valueItem">
-      <div class="value-number-side">
-        <span class="editorial-number">03</span>
-      </div>
-      <div class="valueContent">
-        <span class="editorial-label">O Fruto</span>
-        <h2>Transformar</h2>
-        <p>A leitura que nos deixa iguais ao que éramos foi em vão. Nosso objetivo final é a metanoia: a transformação profunda que nasce de um encontro real com ideias que inspiram a mudança. Queremos ver corações transformados, famílias restauradas e legados eternos sendo construídos.</p>
-      </div>
+    <div class="hero-stage" aria-label="Destaque visual Corrêa Books">
+      <span class="floating-tag tag-one">Fé</span>
+      <span class="floating-tag tag-two">Propósito</span>
+      <span class="floating-tag tag-three">Cultura</span>
+      <img class="hero-family" src="assets/img/FotoCapa.png" alt="Família lendo em um ambiente acolhedor">
+      <img class="hero-book" src="assets/img/capa.png" alt="Capa do livro O Encontro">
     </div>
   </section>
 
-  <section id="diferencial" class="diferencial-section">
-    <div class="editorial-layout">
-      <div class="editorial-title">
-        <span class="editorial-label">Nosso Manifesto</span>
-        <h2>Não fazemos apenas livros.<br>Forjamos legados.</h2>
+  <section id="valores" class="home-values">
+    <div class="section-heading">
+      <span class="section-kicker">Nosso jeito de publicar</span>
+      <h2>Conteúdo com raiz, linguagem de agora.</h2>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <span>01</span>
+        <h3>Educar</h3>
+        <p>Conhecimento que não fica preso no discurso. Publicamos para formar mente, fortalecer fé e abrir conversas que continuam depois da última página.</p>
       </div>
-      <div class="editorial-body">
-        <p class="lead-text">No mercado editorial comum, o livro costuma ser reduzido a um mero produto, e o autor a mais um número em planilhas de vendas.</p>
-        <p>Para a Corrêa Books, cada página é um solo sagrado. Não nascemos para encher prateleiras com títulos passageiros, mas para nutrir mentes e cultivar obras que ecoam na eternidade. Enquanto o mercado busca o barulho das multidões, nós buscamos a profundidade da transformação.</p>
-        <p>Aqui, você não encontra apenas uma gráfica ou um selo comercial distante. Encontra parceiros que compartilham o mesmo peso de glória, guiados pela mesma fé e devoção à Verdade que liberta.</p>
+
+      <div class="value-card featured">
+        <span>02</span>
+        <h3>Influenciar</h3>
+        <p>Livros para atravessar bolhas, stories, grupos e conversas reais. A página vira ponto de partida para uma cultura mais bonita, firme e intencional.</p>
+      </div>
+
+      <div class="value-card">
+        <span>03</span>
+        <h3>Transformar</h3>
+        <p>Não buscamos leituras que apenas ocupam tempo. Buscamos encontros: com a Verdade, com propósito e com a coragem de mudar.</p>
       </div>
     </div>
   </section>
 
-  <section id="biblioteca" class="biblioteca-section">
+  <section id="manifesto" class="manifesto-section home-manifesto">
+    <div class="manifesto-copy">
+      <span class="section-kicker">Manifesto</span>
+      <h2>A gente acredita que livro bom não fica quieto na estante.</h2>
+      <p class="lead-text">Ele puxa conversa, incomoda certezas fáceis e ajuda uma geração a pensar com mais profundidade sem perder o pulso do tempo.</p>
+      <p>Na Corrêa Books, cada obra nasce para carregar mensagem, beleza e direção. Não queremos só publicar títulos: queremos lançar ideias que formam leitores, autores e comunidades com legado.</p>
+    </div>
+
+    <div class="manifesto-board">
+      <div>
+        <strong>menos fórmula</strong>
+        <span>mais verdade</span>
+      </div>
+      <div>
+        <strong>menos vitrine</strong>
+        <span>mais encontro</span>
+      </div>
+      <div>
+        <strong>menos ruído</strong>
+        <span>mais sentido</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="biblioteca" class="biblioteca-section home-library">
     <div class="biblioteca-container">
-      <div class="biblioteca-header">
-        <span class="editorial-label">A Obra Inaugural</span>
-        <h2>O início da nossa jornada.</h2>
+      <div class="section-heading">
+        <span class="section-kicker">Primeira obra</span>
+        <h2>O Encontro abre a nossa biblioteca.</h2>
       </div>
       
-      <div class="editorial-book-display">
+      <div class="book-showcase">
         <div class="book-visual">
           <img src="assets/img/capa.png" alt="Capa do Livro O Encontro">
         </div>
         <div class="book-details">
-          <span class="book-status">Lançamento Exclusivo</span>
+          <span class="book-status">Lançamento exclusivo</span>
           <h3 class="book-title">O Encontro</h3>
           <p class="book-subtitle">Uma Jornada em Busca de Propósito</p>
           <p class="book-author">Por Matheus Corrêa</p>
           
           <div class="book-synopsis">
-            <p>A leitura que nos deixa iguais ao que éramos foi em vão. Esta obra foi cuidadosamente preparada para trazer renovação, instruindo a mente e fundamentando a fé com conteúdos inspiradores.</p>
-            <p>Um encontro real com ideias que transformam o silêncio em respostas, escrito para quem ainda está no meio dessa busca.</p>
+            <p>Otávio parecia ter dado certo: carreira, apartamento, relacionamento e rotina impecável. Por dentro, ainda faltava uma resposta que nada disso conseguia dar.</p>
+            <p>Uma jornada sobre propósito, fé e silêncio, escrita para quem sente que a vida precisa ser mais do que performance.</p>
           </div>
           
-          <a href="o-encontro.html" class="editorial-link">Garantir Meu Exemplar <span class="arrow">&rarr;</span></a>
+          <a href="o-encontro.html" target="_blank" rel="noopener" class="primary-button">Garantir meu exemplar</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="autores" class="autor-section">
-    <div class="autores-header">
-      <span class="editorial-label light">Nossos Autores</span>
-      <h2>As vozes por trás das obras.</h2>
-      <p>Conheça os autores que já fazem parte do nosso selo editorial. E fique de olho: <strong>em breve teremos novos autores!</strong></p>
+  <section id="autores" class="autor-section home-authors">
+    <div class="section-heading light">
+      <span class="section-kicker">Autores</span>
+      <h2>Vozes com história, fé e coragem.</h2>
+      <p>Começamos com Matheus Corrêa e estamos preparando espaço para novos autores que queiram escrever com verdade, profundidade e presença.</p>
     </div>
 
-    <div class="editorial-author-display">
+    <div class="author-showcase">
       <div class="author-portrait">
         <img src="assets/img/author.jpg" alt="Foto do Autor Matheus Corrêa">
       </div>
@@ -121,33 +140,25 @@
         <h3 class="author-name">Matheus Corrêa</h3>
         <span class="author-role">Autor & Idealizador</span>
         <div class="author-text">
-          <p>Meu nome é Matheus Corrêa. Tenho 26 anos, sou militar, estou me formando em Pedagogia e carrego estudos em Teologia. Nasci no interior de São Paulo e hoje moro em Anápolis, Goiás.</p>
-          <p>Escrevi O Encontro porque também carregava essa pergunta. Não em conversas de botequim, não nos stories do Instagram. Mas no silêncio, quando tudo parecia dar certo por fora e estava completamente vazio por dentro.</p>
-          <p>Esse livro nasceu dessa inquietação. E foi escrito para quem ainda está no meio dela.</p>
+          <p>Militar, estudante de Pedagogia e pesquisador de Teologia, Matheus escreve a partir de uma inquietação pessoal: a busca por sentido quando tudo parece bem por fora, mas o interior ainda pede respostas.</p>
+          <p><strong>O Encontro</strong> nasceu dessa pergunta e chega como a primeira obra de um selo que quer formar leitores para além do óbvio.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <section class="home-cta" aria-label="Contato">
+    <span class="section-kicker">Vamos conversar?</span>
+    <h2>Tem um projeto, uma ideia ou quer falar sobre o livro?</h2>
+    <a href="https://wa.me/5512991481871" target="_blank" class="primary-button">Chamar no WhatsApp</a>
+  </section>
+
   <footer class="site-footer">
     <div class="footer-inner">
-      <!-- Bloco 1: Propósito -->
       <div class="footer-column footer-brand">
         <img src="assets/img/logo_verde (Traced).svg" alt="Corrêa Books Símbolo">
         <p>Educar, influenciar e transformar através da Sabedoria que liberta.</p>
       </div>
-
-      <!-- Bloco 2: Navegação Institucional -->
-      <div class="footer-column">
-        <span class="footer-column-title">Institucional</span>
-        <nav class="footer-nav">
-          <a href="#valores">Valores</a>
-          <a href="#diferencial">Diferencial</a>
-          <a href="#biblioteca">Biblioteca</a>
-          <a href="#autores">Autores</a>
-        </nav>
-      </div>
-
       <!-- Bloco 3: Contato -->
       <div class="footer-column">
         <span class="footer-column-title">Contato</span>

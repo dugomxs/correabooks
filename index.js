@@ -5,43 +5,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const menuItens = document.querySelector('.menuItens');
     const menuLinks = document.querySelectorAll('.menuItens a');
+    const scrollOffset = document.body.classList.contains('home-page') ? 0 : 100;
+    const activeMenuOffset = document.body.classList.contains('home-page') ? 2 : 140;
 
-    // 1. Intersection Observer for active menu state
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navItems.forEach(item => {
-                    const link = item.querySelector('a');
-                    if (link) {
-                        const href = link.getAttribute('href');
-                        if (href === `#${id}` || href.endsWith(`#${id}`)) {
-                            navItems.forEach(i => i.classList.remove('active'));
-                            item.classList.add('active');
-                        }
-                    }
-                });
+    // 1. Active menu state based on the section currently at the top of the viewport.
+    function updateActiveMenu() {
+        const marker = window.scrollY + activeMenuOffset;
+        let activeId = '';
+
+        sections.forEach(section => {
+            if (marker >= section.offsetTop) {
+                activeId = section.getAttribute('id');
             }
         });
-    }, {
-        root: null,
-        rootMargin: '-40% 0px -60% 0px',
-        threshold: 0
-    });
 
-    sections.forEach(section => observer.observe(section));
+        navItems.forEach(item => {
+            const link = item.querySelector('a');
+            const href = link ? link.getAttribute('href') : '';
+
+            item.classList.toggle('active', Boolean(activeId) && (href === `#${activeId}` || href.endsWith(`#${activeId}`)));
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveMenu, { passive: true });
+    window.addEventListener('resize', updateActiveMenu);
+    updateActiveMenu();
 
     // 2. Mobile Hamburger Menu Toggle
     if (hamburger && menuItens) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             menuItens.classList.toggle('active');
+            hamburger.closest('.menu')?.classList.toggle('menu-open', menuItens.classList.contains('active'));
         });
 
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 menuItens.classList.remove('active');
+                hamburger.closest('.menu')?.classList.remove('menu-open');
             });
         });
     }
@@ -52,22 +54,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const href = this.getAttribute('href');
             const [path, hash] = href.split('#');
             
-            if (!path || path === window.location.pathname.split('/').pop() || path === 'index.html') {
-                const targetElement = document.getElementById(hash);
+            // Check if we are on the page where the hash exists
+            const isSamePage = !path ||
+                             path === window.location.pathname.split('/').pop() ||
+                             path === 'index.html' ||
+                             (path === 'index.html' && window.location.pathname === '/') ||
+                             (window.location.pathname.endsWith(path));
 
+            if (isSamePage) {
+                const targetElement = document.getElementById(hash);
                 if (targetElement) {
                     e.preventDefault();
                     
                     if (hamburger) {
                         hamburger.classList.remove('active');
                         menuItens.classList.remove('active');
+                        hamburger.closest('.menu')?.classList.remove('menu-open');
                     }
 
-                    // Using offsetTop for absolute position relative to body
-                    const targetPosition = targetElement.offsetTop - 100;
+                    // Use offsetTop to get the actual static position in the document
+                    // getBoundingClientRect() is incorrect for position: sticky elements
+                    const offsetPosition = Math.max(targetElement.offsetTop - scrollOffset, 0);
 
                     window.scrollTo({
-                        top: targetPosition,
+                        top: offsetPosition,
                         behavior: 'smooth'
                     });
 
@@ -81,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.editorial-link, .book-primary-link, a[href="o-encontro.html"]').forEach(link => {
         if (link.getAttribute('href') === 'o-encontro.html') {
             link.addEventListener('click', (e) => {
-                const shouldSkipTransition = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
+                const shouldSkipTransition = link.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
                 if (shouldSkipTransition) return;
 
                 e.preventDefault();
@@ -94,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 5. Sticky Sections Logic (Fix for tall sections)
-    const stickySections = document.querySelectorAll('.valueItem, .diferencial-section');
+    const stickySections = document.querySelectorAll('.valueItem');
     function updateStickyTops() {
         const windowHeight = window.innerHeight;
         stickySections.forEach(section => {
@@ -120,11 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
             setTimeout(() => {
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = targetElement.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = Math.max(elementPosition - scrollOffset, 0);
+
                 window.scrollTo({
-                    top: targetElement.offsetTop,
+                    top: offsetPosition,
                     behavior: 'smooth'
                 });
-            }, 500);
+            }, 600);
         }
     }
 });
