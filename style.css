@@ -232,7 +232,7 @@ section[id] {
   font-family: Fraunces, serif;
   font-size: 25rem;
   font-weight: 200;
-  color: rgba(138, 111, 111, 0.15); /* Increased opacity to make it more visible */
+  color: rgba(92, 122, 156, 0.15); /* Increased opacity to make it more visible */
   line-height: 1;
   user-select: none;
 }
@@ -297,7 +297,7 @@ section[id] {
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: #8a6f6f;
+  color: #5c7a9c;
   font-weight: 600;
   margin-bottom: 2rem;
   display: flex;
@@ -309,7 +309,7 @@ section[id] {
   content: '';
   width: 40px;
   height: 2px;
-  background-color: #8a6f6f;
+  background-color: #5c7a9c;
 }
 
 .editorial-title h2 {
@@ -423,7 +423,7 @@ section[id] {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #8a6f6f;
+  color: #5c7a9c;
   font-weight: 600;
   margin-bottom: 1.5rem;
   position: relative;
@@ -438,7 +438,7 @@ section[id] {
   transform: translateY(-50%);
   width: 15px;
   height: 1px;
-  background-color: #8a6f6f;
+  background-color: #5c7a9c;
 }
 
 .book-title {
@@ -461,7 +461,7 @@ section[id] {
 .book-author {
   font-family: Montserrat, sans-serif;
   font-size: 1.1rem;
-  color: #8a6f6f;
+  color: #5c7a9c;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -505,8 +505,8 @@ section[id] {
 }
 
 .editorial-link:hover {
-  color: #8a6f6f;
-  border-color: #8a6f6f;
+  color: #5c7a9c;
+  border-color: #5c7a9c;
 }
 
 .editorial-link:hover .arrow {
@@ -538,11 +538,11 @@ section[id] {
 }
 
 .editorial-label.light {
-  color: #a38d8d;
+  color: #849cb6;
 }
 
 .editorial-label.light::before {
-  background-color: #a38d8d;
+  background-color: #849cb6;
 }
 
 .autores-header h2 {
@@ -562,7 +562,7 @@ section[id] {
 }
 
 .autores-header p strong {
-  color: #a38d8d;
+  color: #849cb6;
   font-weight: 500;
 }
 
@@ -614,7 +614,7 @@ section[id] {
 .author-role {
   font-family: Montserrat, sans-serif;
   font-size: 1.1rem;
-  color: #a38d8d;
+  color: #849cb6;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 3rem;
@@ -684,7 +684,7 @@ section[id] {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #8a6f6f;
+  color: #5c7a9c;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
@@ -1849,10 +1849,10 @@ body.book-page-leaving::before {
 .home-page {
   --home-ink: #101216;
   --home-paper: #fff8ea;
-  --home-mint: #a7ff6b;
-  --home-green: #22483b;
-  --home-coral: #ff5b4a;
-  --home-yellow: #ffd94a;
+  --home-mint: #ffebd6;
+  --home-green: #0c101d;
+  --home-coral: #2f6dff;
+  --home-yellow: #ff9e7d;
   --home-blue: #2f6dff;
   --home-line: rgba(16, 18, 22, 0.14);
   background:
@@ -1932,7 +1932,7 @@ body.book-page-leaving::before {
   padding: 7.15rem max(1.25rem, calc((100vw - 1180px) / 2)) 2.25rem;
   border-radius: 0;
   background:
-    linear-gradient(135deg, rgba(167, 255, 107, 0.82) 0 33%, rgba(255, 217, 74, 0.78) 33% 57%, rgba(255, 91, 74, 0.86) 57% 100%);
+    linear-gradient(135deg, rgba(255, 235, 214, 0.82) 0 33%, rgba(255, 158, 125, 0.78) 33% 57%, rgba(47, 109, 255, 0.86) 57% 100%);
   display: grid;
   grid-template-columns: minmax(280px, 0.84fr) minmax(340px, 1.16fr);
   gap: 2.4rem;
